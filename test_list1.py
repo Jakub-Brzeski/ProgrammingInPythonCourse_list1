@@ -1,0 +1,45 @@
+import unittest
+import list1
+
+#task 1
+class TestDivisible(unittest.TestCase):
+    def test_typical_values(self):
+        self.assertEqual(list1.divisible([1, 5, 11, 15, 395], 5),
+                         [5, 15, 395])
+        self.assertEqual(list1.divisible([1, 5, 11, 15, 395], 999),[])
+
+    def test_boundary_values(self):
+        self.assertEqual(list1.divisible([], 5), [])
+        self.assertEqual(list1.divisible([-5, -10, 15, 33, -33], -5),
+                         [-5, -10, 15])
+
+    def test_exceptions(self):
+        with self.assertRaises(ValueError):
+            list1.divisible([1, 2, 3], 0)
+        with self.assertRaises(TypeError):
+            list1.divisible([1, 2, 3], 1.5)
+        with self.assertRaises(TypeError):
+            list1.divisible([1, "two", 3.5], 1)
+        with self.assertRaises(TypeError):
+            list1.divisible(5, 1)
+
+#task 2
+class TestCommon(unittest.TestCase):
+    def test_typical_values(self):
+        self.assertEqual(list1.common([1, 1, 2, 2, 3.5, 4.5, "one", "two", 1],
+                                      [2, 1, 1, 1, 1, 4.5, "two"]),
+                         [1, 1, 2, 4.5, "two", 1])
+
+    def test_boundary_values(self):
+        self.assertEqual(list1.common([], []), [])
+        self.assertEqual(list1.common([1, 2], [3, 4]), [])
+
+    def test_exceptions(self):
+        with self.assertRaises(TypeError):
+            list1.common(1, [1, 2, 3])
+        with self.assertRaises(TypeError):
+            list1.common([1, 2, 3], 1)
+
+if __name__ == '__main__':
+    unittest.main()
+
